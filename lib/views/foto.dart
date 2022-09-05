@@ -256,21 +256,9 @@ class _fotosState extends State<fotos> {
               )
             : _handlePreview(),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Semantics(
-            label: 'image_picker_example_from_gallery',
-            child: FloatingActionButton(
-              onPressed: () {
-                isVideo = false;
-                _onImageButtonPressed(ImageSource.gallery, context: context);
-              },
-              heroTag: 'image0',
-              tooltip: 'Escolha a imagem da galeria',
-              child: const Icon(Icons.photo),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.only(top: 16.0),
             child: FloatingActionButton(
