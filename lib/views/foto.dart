@@ -333,7 +333,7 @@ class _fotosState extends State<fotos> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text('Adicione parâmentros opcionais'),
+            title: const Text('Adiciona parâmentros opcionais'),
             content: Column(
               children: <Widget>[
                 TextField(

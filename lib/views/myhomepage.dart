@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
               SizedBox(height: 100,),
               TextField(
                 autofocus: true,
-                keyboardType: TextInputType.name,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.face_outlined),
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
               TextField(
                 obscureText: true,
                 autofocus: true,
-                keyboardType: TextInputType.name,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.key),
