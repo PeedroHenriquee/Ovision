@@ -43,11 +43,7 @@ class _fotosState extends State<fotos> {
         controller = VideoPlayerController.file(File(file.path));
       }
       _controller = controller;
-      // In web, most browsers won't honor a programmatic call to .play
-      // if the video has a sound track (and is not muted).
-      // Mute the video so it auto-plays in web!
-      // This is not needed if the call to .play is the result of user
-      // interaction (clicking on a "play" button, for example).
+     
       const double volume = kIsWeb ? 0.0 : 1.0;
       await controller.setVolume(volume);
       await controller.initialize();
@@ -160,8 +156,7 @@ class _fotosState extends State<fotos> {
         child: ListView.builder(
           key: UniqueKey(),
           itemBuilder: (BuildContext context, int index) {
-            // Why network for web?
-            // See https://pub.dev/packages/image_picker#getting-ready-for-the-web-platform
+           
             return Semantics(
               label: 'image_picker_example_picked_image',
               child: kIsWeb
