@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -13,6 +14,20 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  void initState() {
+    // TODO: implement initState
+    
+    FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User user) {
+    if (user == null) {
+      print('Voce nao tem usuario logado');
+    } else {
+      print('voce tem usuario logado!');
+    }
+  });
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
