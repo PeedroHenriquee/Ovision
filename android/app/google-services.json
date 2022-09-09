@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "392813468042",
+    "project_id": "ovisonbd",
+    "storage_bucket": "ovisonbd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392813468042:android:01ca6d1035b60456565073",
+        "android_client_info": {
+          "package_name": "com.example.ovision"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392813468042-rr1bteu7vr4l7067i8iip6uq4icm7gj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhVGUJnuAFvwF_8APa70ltki6FjrhuSg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392813468042-rr1bteu7vr4l7067i8iip6uq4icm7gj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
