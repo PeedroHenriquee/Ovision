@@ -13,19 +13,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _emailController = TextEditingController();
+  final _senhaController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
+
   @override
   void initState() {
     // TODO: implement initState
-    
-    FirebaseAuth.instance
-  .authStateChanges()
-  .listen((User user) {
-    if (user == null) {
-      print('Voce nao tem usuario logado');
-    } else {
-      print('voce tem usuario logado!');
-    }
-  });
+
+    FirebaseAuth.instance.authStateChanges().listen((User user) {
+      if (user == null) {
+        print('Voce nao tem usuario logado');
+      } else {
+        print('voce tem usuario logado!');
+      }
+    });
   }
 
   Widget build(BuildContext context) {
@@ -45,17 +47,21 @@ class _HomeState extends State<Home> {
                 height: 300,
                 child: Image.asset('images/as.jpeg'),
               ),
-              SizedBox(height: 100,),
+              SizedBox(
+                height: 100,
+              ),
               TextField(
+                controller: _emailController,
                 autofocus: true,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    icon: Icon(Icons.face_outlined),
+                    icon: Icon(Icons.person_rounded),
                     hintText: "Digite Email"),
               ),
               SizedBox(height: 20.0),
               TextField(
+                controller: _senhaController,
                 obscureText: true,
                 autofocus: true,
                 keyboardType: TextInputType.emailAddress,
@@ -67,21 +73,49 @@ class _HomeState extends State<Home> {
               SizedBox(height: 20.0),
               ElevatedButton(
                 child: Text('ENTRAR'),
-                
-                 
-                
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => fotos(title: 'fotos')));
+                  login();
+                  
                 },
-                style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.green),),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.green),
+                ),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  login() async {
+    try {
+      UserCredential userCredential =
+          await _firebaseAuth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _senhaController.text,
+      );
+      if (userCredential != null) {
+        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => fotos(title: 'fotos')));
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Usuário nao encontrado"),
+          backgroundColor: Colors.redAccent,
+        ),);
+      } else if (e.code == 'arong password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Sua senha está errada"),
+          backgroundColor: Colors.redAccent,
+        ),
+        );
+      }
+    }
   }
 }
