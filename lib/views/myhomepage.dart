@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
   login() async {
     try {
       UserCredential userCredential =
-          await _firebaseAuth.signInWithEmailAndPassword(
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text,
         password: _senhaController.text,
       );
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
           content: Text("Usuário nao encontrado"),
           backgroundColor: Colors.redAccent,
         ),);
-      } else if (e.code == 'arong password') {
+      } else if (e.code == 'wrong password') {
         ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Sua senha está errada"),

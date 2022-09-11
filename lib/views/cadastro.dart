@@ -84,7 +84,7 @@ class _CadastroState extends State<Cadastro> {
       } else if (e.code == 'email-already-in-use') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('este email ja foi cadastrado'),
+            content: Text('este email ja foi cadastrado, tente outro e-mail'),
             backgroundColor: Colors.redAccent,
           ),
         );
