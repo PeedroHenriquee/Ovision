@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:ovision/views/cadastro.dart';
 import 'package:ovision/views/foto.dart';
 
 class Home extends StatefulWidget {
@@ -44,7 +45,7 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               SizedBox(
-                height: 300,
+                height: 200,
                 child: Image.asset('images/as.jpeg'),
               ),
               SizedBox(
@@ -59,7 +60,7 @@ class _HomeState extends State<Home> {
                     icon: Icon(Icons.person_rounded),
                     hintText: "Digite Email"),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 10.0),
               TextField(
                 controller: _senhaController,
                 obscureText: true,
@@ -70,14 +71,30 @@ class _HomeState extends State<Home> {
                     icon: Icon(Icons.key),
                     hintText: 'Digite Senha'),
               ),
-              SizedBox(height: 20.0),
+              SizedBox(height: 10.0),
               ElevatedButton(
                 child: Text('ENTRAR'),
                 onPressed: () {
                   login();
                   
                 },
+                style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(120, 40)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.green),
+                ),
+              ),
+              SizedBox(height: 5.0,),
+              ElevatedButton(
+                child: Text('CADASTRAR'),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Cadastro(title: 'Cadastro')));
+                  
+                },
                 style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(Size(100, 40)),
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.green),
                 ),
@@ -119,3 +136,8 @@ class _HomeState extends State<Home> {
     }
   }
 }
+
+
+
+
+
