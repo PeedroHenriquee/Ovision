@@ -53,18 +53,19 @@ class _HomeState extends State<Home> {
               ),
               TextField(
                 controller: _emailController,
-                autofocus: true,
+                autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.person_rounded),
+                    
                     hintText: "Digite Email"),
               ),
               SizedBox(height: 10.0),
               TextField(
                 controller: _senhaController,
                 obscureText: true,
-                autofocus: true,
+                autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
