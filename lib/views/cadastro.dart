@@ -42,6 +42,7 @@ class _CadastroState extends State<Cadastro> {
                 label: Text('Digite seu email'), icon: Icon(Icons.email))),
         TextFormField(
             controller: _psController,
+            obscureText: true,
             decoration: InputDecoration(
                 label: Text('Digite sua senha'), icon: Icon(Icons.key_off))),
         SizedBox(
