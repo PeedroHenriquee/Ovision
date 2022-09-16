@@ -23,14 +23,17 @@ class _CadastroState extends State<Cadastro> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
+      //incluir  logo.
       body: ListView(padding: EdgeInsets.all(32.0), children: [
         SizedBox(
           height: 70,
           child: Image.asset('images/as.jpeg'),
         ),
+        //Separarção entre a foto e o espaço de loguin.
         SizedBox(
           height: 100,
         ),
+        //classe para incluir o email
         TextFormField(
             controller: _nomeController,
             decoration: InputDecoration(
@@ -47,6 +50,7 @@ class _CadastroState extends State<Cadastro> {
         SizedBox(
           height: 60,
         ),
+        //botao para cadastrar usúario.
         ElevatedButton(
           onPressed: () {
             cadastrar();
@@ -84,7 +88,7 @@ class _CadastroState extends State<Cadastro> {
       } else if (e.code == 'email-already-in-use') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('este email ja foi cadastrado, tente outro e-mail'),
+            content: Text('este e-mail ja foi cadastrado, tente outro e-mail'),
             backgroundColor: Colors.redAccent,
           ),
         );
