@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.person_rounded),
-                    hintText: "Digite Email"),
+                    hintText: "Digite E-mail"),
               ),
               SizedBox(height: 10.0),
               TextField(

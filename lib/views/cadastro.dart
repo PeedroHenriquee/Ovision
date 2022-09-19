@@ -39,7 +39,7 @@ class _CadastroState extends State<Cadastro> {
         TextFormField(
             controller: _emailController,
             decoration: InputDecoration(
-                label: Text('Digite seu email'), icon: Icon(Icons.email))),
+                label: Text('Digite seu e-mail'), icon: Icon(Icons.email))),
         TextFormField(
             controller: _psController,
             decoration: InputDecoration(
