@@ -37,4 +37,5 @@ flutter:
 
   assets:
       - images/as.jpeg
+      - images/logo_github.png
   
