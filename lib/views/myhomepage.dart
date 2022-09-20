@@ -73,20 +73,20 @@ class _HomeState extends State<Home> {
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.key),
                     hintText: 'Digite Senha',
-                    suffixIcon: GestureDetector(
-                    child: Icon( _showPassword == false ? Icons.visibility_off : Icons.visibility, color: Colors.grey,),
-                    onTap: () {
-                      setState(() {
-                        _showPassword = !_showPassword;
+                    suffixIcon: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                      child: Icon( _showPassword == false ? Icons.visibility_off : Icons.visibility, color: Colors.grey,),
+                      onTap: () {
+                        setState(() {
+                          _showPassword = !_showPassword;
                       });
                     },
                   ),
-
+                ),
               ),
               
                 ),
-                
-                
               
               SizedBox(height: 10.0),
               ElevatedButton(
