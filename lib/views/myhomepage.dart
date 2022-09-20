@@ -17,6 +17,8 @@ class _HomeState extends State<Home> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
+  
+  bool _showPassword = false;
 
   @override
   void initState() {
@@ -58,20 +60,34 @@ class _HomeState extends State<Home> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.person_rounded),
-                    
-                    hintText: "Digite Email"),
+                    hintText: "Digite E-mail"),
+
               ),
               SizedBox(height: 10.0),
               TextField(
                 controller: _senhaController,
-                obscureText: true,
-                autofocus: false,
+                obscureText: _showPassword == false ? true : false,
+                autofocus: true,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.key),
-                    hintText: 'Digite Senha'),
+                    hintText: 'Digite Senha',
+                    suffixIcon: GestureDetector(
+                    child: Icon( _showPassword == false ? Icons.visibility_off : Icons.visibility, color: Colors.grey,),
+                    onTap: () {
+                      setState(() {
+                        _showPassword = !_showPassword;
+                      });
+                    },
+                  ),
+
               ),
+              
+                ),
+                
+                
+              
               SizedBox(height: 10.0),
               ElevatedButton(
                 child: Text('ENTRAR'),
@@ -92,7 +108,6 @@ class _HomeState extends State<Home> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Cadastro(title: 'Cadastro')));
-                  
                 },
                 style: ButtonStyle(
                   minimumSize: MaterialStateProperty.all(Size(100, 40)),
