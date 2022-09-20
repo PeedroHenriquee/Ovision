@@ -55,12 +55,13 @@ class _HomeState extends State<Home> {
               ),
               TextField(
                 controller: _emailController,
-                autofocus: true,
+                autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.person_rounded),
                     hintText: "Digite E-mail"),
+
               ),
               SizedBox(height: 10.0),
               TextField(
