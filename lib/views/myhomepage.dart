@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ovision/views/cadastro.dart';
 import 'package:ovision/views/foto.dart';
+import 'package:ovision/views/fotoo.dart';
 
 class Home extends StatefulWidget {
   const Home({key, title}) : super(key: key);
@@ -133,7 +134,7 @@ class _HomeState extends State<Home> {
         Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => fotos(title: 'fotos')));
+                          builder: (context) => Fotos()));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

@@ -1,90 +1,109 @@
-import 'dart:html';
-import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
-class fotoo extends StatefulWidget {
-  const fotoo({Key key}) : super(key: key);
+import 'package:image_picker/image_picker.dart';
+
+
+
+
+class Fotos extends StatefulWidget {
+  
 
   @override
-  State<fotoo> createState() => _fotooState();
+  State<Fotos> createState() => _Fotostate();
 }
 
-class _fotooState extends State<fotoo> {
-
+class _Fotostate extends State<Fotos> {
   File imageSelect;
-  final _imagePicker = ImagePicker();
 
+  final ImagePicker _imagePicker = ImagePicker();
+
+  pickImageCamera() async {
+    final XFile image =
+        await _imagePicker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      setState(() {
+        imageSelect = File(image.path);
+      });
+    }
+  }
+
+  pickImageGaleria() async {
+    final XFile image =
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        imageSelect = File(image.path);
+      });
+    }
+  }
+
+  clearImage() {
+    setState(() {
+      imageSelect = null;
+    });
+  }
 
   @override
-
   Widget build(BuildContext context) {
-    
-    return Scaffold(
-      appBar: AppBar(title: Text('Seletor de Image'),),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-        imageSelect == null ? 
-        AspectRatio(aspectRatio: 1.5,
-        child: Container(
-          color: Colors.green[200],
-          child: Column(
-            children: [
-              Icon(Icons.image),
-              Text('Não há Image Selecionada')
-            ],
-          ),
-          
-          ),
-        ):
-        AspectRatio(
-          aspectRatio: 1.5,
-          child: Image.file(
-            File(imageSelect!.path),
-            fit: BoxFit.cover,),
-        ),
-        Column(
+    return Scaffold(appBar: AppBar(
+        title: Text('Captura de Imagem'),
+        backgroundColor: Colors.green,
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
           children: [
-            ElevatedButton(onPressed: (){
-              pickImageCamera();
-
-            }, child: Text('Pick Image Camera'),
+            AspectRatio(
+              aspectRatio: 1.5,
+              child: imageSelect == null
+                  ? Container(
+                      color: Colors.grey,
+                      width: double.maxFinite,
+                      height: double.maxFinite,
+                      child: const Icon(Icons.camera_alt, ),
+                    )
+                  : Image.file(
+                      File(imageSelect.path),
+                      fit: BoxFit.cover,
+                      
+                    ),
             ),
-            ElevatedButton(onPressed: (){
-              pickImageGallery();
+            SizedBox(height: 40,),
+            
+            Row(
+              mainAxisAlignment : MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
 
-            }, child: Text('Pick Image Gallery'),
-            )
+              children: [
+                ElevatedButton(
+                  style: ButtonStyle(
+    backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+  ),
+                  onPressed: pickImageCamera,
+                  child: const Icon(Icons.camera_alt, color: Color.fromARGB(255, 19, 17, 17),),
+                
+                  
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+    backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+  ),
+                  onPressed: pickImageGaleria,
+                  child: const Icon(Icons.photo_library, color: Color.fromARGB(255, 19, 17, 17),),
+                ),
+              ],
+            ),
+            if (imageSelect != null)
+              ElevatedButton(
+                onPressed: clearImage,
+                child: const Text("Eliminar"),
+              ),
           ],
-
-        )
-        
-
-        ],
         ),
+      ),
     );
   }
-  
-  pickImageCamera() async {
-
-    final XFile image = await _imagePicker.pickImage(source: ImageSource.camera);
-    if(image != null){
-      setState(() {
-        imageSelect = File(image.path);
-      });
-    }
-  }
-
-  pickImageGallery() async {
-    final XFile image = await _imagePicker.pickImage(source: ImageSource.gallery);
-    if(image != null){
-      setState(() {
-        imageSelect = File(image.path);
-      });
-    }
-
-  }
-
-
 }
