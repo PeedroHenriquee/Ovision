@@ -3,12 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
-
-
 class Fotos extends StatefulWidget {
-  
-
   @override
   State<Fotos> createState() => _Fotostate();
 }
@@ -48,7 +43,8 @@ class _Fotostate extends State<Fotos> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: Text('Captura de Imagem'),
         backgroundColor: Colors.green,
         centerTitle: true,
@@ -63,36 +59,42 @@ class _Fotostate extends State<Fotos> {
                       color: Colors.grey,
                       width: double.maxFinite,
                       height: double.maxFinite,
-                      child: const Icon(Icons.camera_alt, ),
+                      child: const Icon(
+                        Icons.camera_alt,
+                      ),
                     )
                   : Image.file(
                       File(imageSelect.path),
                       fit: BoxFit.cover,
-                      
                     ),
             ),
-            SizedBox(height: 40,),
-            
+            SizedBox(
+              height: 40,
+            ),
             Row(
-              mainAxisAlignment : MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
-
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(
-    backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
-  ),
-                  onPressed: pickImageCamera,
-                  child: const Icon(Icons.camera_alt, color: Color.fromARGB(255, 19, 17, 17),),
-                
+                  style: ElevatedButton.styleFrom(primary: Colors.green),
                   
+                  onPressed: pickImageCamera,
+                  child: const Icon(
+                    Icons.camera_alt,
+                    color: Color.fromARGB(255, 19, 17, 17),
+                  ),
                 ),
+                
                 ElevatedButton(
-                  style: ButtonStyle(
-    backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
-  ),
+                 
+                        style: ElevatedButton.styleFrom(primary: Colors.green),
+                  
                   onPressed: pickImageGaleria,
-                  child: const Icon(Icons.photo_library, color: Color.fromARGB(255, 19, 17, 17),),
+                  child: const Icon(
+                    Icons.photo_library,
+                    color: Color.fromARGB(255, 19, 17, 17),
+                  ),
+
                 ),
               ],
             ),
