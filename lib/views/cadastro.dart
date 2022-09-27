@@ -18,20 +18,22 @@ class _CadastroState extends State<Cadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela Cadastro'),
-        centerTitle: true,
-        backgroundColor: Colors.green,
-      ),
+      
+      
+      
       //incluir  logo.
       body: ListView(padding: EdgeInsets.all(32.0), children: [
         SizedBox(
-          height: 70,
+          height: 50,
+
+        ),
+        SizedBox(
+          height: 150,
           child: Image.asset('images/as.png'),
         ),
         //Separarção entre a foto e o espaço de loguin.
         SizedBox(
-          height: 100,
+          height: 40,
         ),
         //classe para incluir o email
         TextFormField(
@@ -60,10 +62,12 @@ class _CadastroState extends State<Cadastro> {
           style: ButtonStyle(
             minimumSize: MaterialStateProperty.all(Size(120, 40)),
             backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
+
           ),
         ),
-      ]),
-    );
+      ]
+    ));
   }
 
   cadastrar() async {

@@ -36,31 +36,37 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('O-Vision'),
-        centerTitle: true,
-        backgroundColor: Colors.green,
-      ),
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
           padding: EdgeInsets.all(32.0),
           child: Column(
             children: [
+              Text('O-vision',
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 35,
+                fontWeight: FontWeight.w600
+              ),),
               SizedBox(
+                height: 55,
+              ),
+              Container(
                 height: 200,
                 child: Image.asset('images/as.png'),
               ),
               SizedBox(
-                height: 100,
+                height: 55,
               ),
               TextField(
                 controller: _emailController,
                 autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.person_rounded),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    ),
+                    prefixIcon: Icon(Icons.person_rounded),
                     hintText: "Digite E-mail"),
 
               ),
@@ -68,11 +74,13 @@ class _HomeState extends State<Home> {
               TextField(
                 controller: _senhaController,
                 obscureText: _showPassword == false ? true : false,
-                autofocus: false,
+                autofocus: true,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.key),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    ),
+                    prefixIcon: Icon(Icons.key),
                     hintText: 'Digite Senha',
                     suffixIcon: MouseRegion(
                       cursor: SystemMouseCursors.click,
@@ -89,20 +97,23 @@ class _HomeState extends State<Home> {
               
                 ),
               
-              SizedBox(height: 10.0),
-              ElevatedButton(
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                   ElevatedButton(
                 child: Text('ENTRAR'),
                 onPressed: () {
                   login();
                   
                 },
-                style: ButtonStyle(minimumSize: MaterialStateProperty.all(Size(120, 40)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green),
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all(Size(130, 40)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
                 ),
               ),
-              SizedBox(height: 5.0,),
-              ElevatedButton(
+                  ElevatedButton(
                 child: Text('CADASTRAR'),
                 onPressed: () {
                   Navigator.push(
@@ -111,11 +122,13 @@ class _HomeState extends State<Home> {
                           builder: (context) => Cadastro(title: 'Cadastro')));
                 },
                 style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size(100, 40)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.green),
+                  minimumSize: MaterialStateProperty.all(Size(130, 40)),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
                 ),
               ),
+                ],
+              )
             ],
           ),
         ),
