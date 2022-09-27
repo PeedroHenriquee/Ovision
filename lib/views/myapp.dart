@@ -11,7 +11,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: false),
+      theme: ThemeData(
+        primaryColor: Colors.green,
+        primarySwatch: Colors.green,
+        appBarTheme: AppBarTheme(
+          elevation: 0
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       title: "Ovision",
       initialRoute: '/',

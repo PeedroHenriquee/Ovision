@@ -27,7 +27,7 @@ class _CadastroState extends State<Cadastro> {
       body: ListView(padding: EdgeInsets.all(32.0), children: [
         SizedBox(
           height: 70,
-          child: Image.asset('images/as.jpeg'),
+          child: Image.asset('images/as.png'),
         ),
         //Separarção entre a foto e o espaço de loguin.
         SizedBox(

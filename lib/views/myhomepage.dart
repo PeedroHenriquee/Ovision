@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
             children: [
               SizedBox(
                 height: 200,
-                child: Image.asset('images/as.jpeg'),
+                child: Image.asset('images/as.png'),
               ),
               SizedBox(
                 height: 100,
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
               TextField(
                 controller: _senhaController,
                 obscureText: _showPassword == false ? true : false,
-                autofocus: true,
+                autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
