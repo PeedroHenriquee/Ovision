@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
               TextField(
                 controller: _senhaController,
                 obscureText: _showPassword == false ? true : false,
-                autofocus: true,
+                autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(

@@ -18,56 +18,69 @@ class _CadastroState extends State<Cadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      
-      
-      //incluir  logo.
-      body: ListView(padding: EdgeInsets.all(32.0), children: [
-        SizedBox(
-          height: 50,
-
-        ),
-        SizedBox(
-          height: 150,
-          child: Image.asset('images/as.png'),
-        ),
-        //Separarção entre a foto e o espaço de loguin.
-        SizedBox(
-          height: 40,
-        ),
-        //classe para incluir o email
-        TextFormField(
-            controller: _nomeController,
-            decoration: InputDecoration(
-                label: Text('Digite seu nome'),
-                icon: Icon(Icons.account_box_outlined))),
-        TextFormField(
-            controller: _emailController,
-            decoration: InputDecoration(
-                label: Text('Digite seu e-mail'), icon: Icon(Icons.email))),
-        TextFormField(
-            controller: _psController,
-            obscureText: true,
-            decoration: InputDecoration(
-                label: Text('Digite sua senha'), icon: Icon(Icons.key_off))),
-        SizedBox(
-          height: 60,
-        ),
-        //botao para cadastrar usúario.
-        ElevatedButton(
-          onPressed: () {
-            cadastrar();
-          },
-          child: Text('CADASTRAR'),
-          style: ButtonStyle(
-            minimumSize: MaterialStateProperty.all(Size(120, 40)),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
-
+      body: Container(
+        alignment: Alignment.center,
+        child: SingleChildScrollView(padding: EdgeInsets.all(32.0),
+        child: Column(
+          children :[
+            Text('Cadastro',
+            style: TextStyle(
+              color: Colors.green,
+              fontSize: 30,
+              fontWeight: FontWeight.w600
+            ),),
+            SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+              height: 150,
+              child: Image.asset('images/as.png'),
+            ),
+            //Separarção entre a foto e o espaço de loguin.
+            SizedBox(
+              height: 40,
+            ),
+            //classe para incluir o email
+            TextFormField(
+                controller: _nomeController,
+                decoration: InputDecoration(
+                    label: Text('Digite seu nome'),
+                    icon: Icon(Icons.account_box_outlined))),
+            SizedBox(
+              height: 5,),
+            TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                    label: Text('Digite seu e-mail'),
+                    icon: Icon(Icons.email))),
+              SizedBox(
+              height: 5,),
+            TextFormField(
+                controller: _psController,
+                obscureText: true,
+                decoration: InputDecoration(
+                    label: Text('Digite sua senha'), 
+                    icon: Icon(Icons.key_off))),
+            SizedBox(
+              height: 40,
+            ),
+            //botao para cadastrar usúario.
+            ElevatedButton(
+              onPressed: () {
+                cadastrar();
+              },
+              child: Text('CADASTRAR'),
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all(Size(120, 40)),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
+                ),
+              ),
+            ]
           ),
         ),
-      ]
-    ));
+      )
+    );
   }
 
   cadastrar() async {

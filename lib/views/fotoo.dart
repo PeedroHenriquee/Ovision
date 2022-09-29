@@ -44,23 +44,23 @@ class _Fotostate extends State<Fotos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Captura de Imagem'),
-        backgroundColor: Colors.green,
-        centerTitle: true,
-      ),
       body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             AspectRatio(
-              aspectRatio: 1.5,
-              child: imageSelect == null
-                  ? Container(
+              aspectRatio: 4/5,
+              child: imageSelect == null?
+              Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(32.0),
                       color: Colors.grey,
                       width: double.maxFinite,
-                      height: double.maxFinite,
+                      height: 500,
                       child: const Icon(
                         Icons.camera_alt,
+                        color: Colors.white,
                       ),
                     )
                   : Image.file(
@@ -75,26 +75,33 @@ class _Fotostate extends State<Fotos> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
-                  
+               ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15))
+                    ),
+                      
                   onPressed: pickImageCamera,
                   child: const Icon(
                     Icons.camera_alt,
-                    color: Color.fromARGB(255, 19, 17, 17),
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
-                
+
                 ElevatedButton(
-                 
-                        style: ElevatedButton.styleFrom(primary: Colors.green),
-                  
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15))
+                    ),
+
                   onPressed: pickImageGaleria,
                   child: const Icon(
                     Icons.photo_library,
-                    color: Color.fromARGB(255, 19, 17, 17),
+                    color: Color.fromARGB(255, 255, 255, 255),
                   ),
-
                 ),
               ],
             ),
