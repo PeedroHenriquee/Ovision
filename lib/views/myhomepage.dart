@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ovision/views/cadastro.dart';
-import 'package:ovision/views/foto.dart';
+
 import 'package:ovision/views/fotoo.dart';
 
 class Home extends StatefulWidget {
