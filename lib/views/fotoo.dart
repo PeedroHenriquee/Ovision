@@ -1,9 +1,13 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ovision/main.dart';
+import 'package:ovision/views/myapp.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 
 class Fotos extends StatefulWidget {
   @override
@@ -12,8 +16,11 @@ class Fotos extends StatefulWidget {
 
 class _Fotostate extends State<Fotos> {
   File imageSelect;
+  
 
   final ImagePicker _imagePicker = ImagePicker();
+  
+ 
 
   pickImageCamera() async {
     final XFile image =
@@ -26,6 +33,7 @@ class _Fotostate extends State<Fotos> {
     }
   }
 
+
   pickImageGaleria() async {
     final XFile image =
         await _imagePicker.pickImage(source: ImageSource.gallery);
@@ -34,15 +42,56 @@ class _Fotostate extends State<Fotos> {
       setState(() {
         imageSelect = File(image.path);
       });
+
+      
+
     }
+
+    
+  
+
+
   }
+
+  addImage() {
+        setState(() async {
+      
+      
+      String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+      final referenceRoot = FirebaseStorage.instance.ref();
+
+      final referenceDirImages = referenceRoot.child('images');
+
+      final referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+
+      try{
+         await referenceImageToUpload.putFile(File(imageSelect.path));
+
+          await referenceImageToUpload.getDownloadURL();
+
+      }catch(error){
+
+        //erro ocorrido
+      }
+
+   
+    });
+  }
+  
+
+  
 
   clearImage() {
     setState(() {
       imageSelect = null;
-    });
-  }
 
+    });
+
+
+  
+  }
+  String imageUrl = ' ';
   uploadImage() {
     setState(() async {
       // Create a storage reference from our app
@@ -89,7 +138,9 @@ class _Fotostate extends State<Fotos> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
+        
         child: Column(
+
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -145,6 +196,13 @@ class _Fotostate extends State<Fotos> {
                 ),
               ],
             ),
+            if(imageSelect != null)
+              ElevatedButton(
+                onPressed: addImage,
+                child: const Text("Salvar"),
+                  
+              
+              ),
             if (imageSelect != null)
               ElevatedButton(
                 onPressed: uploadImage,
@@ -154,10 +212,16 @@ class _Fotostate extends State<Fotos> {
               ElevatedButton(
                 onPressed: clearImage,
                 child: const Text("Eliminar"),
+              
               ),
+            
+
           ],
         ),
       ),
     );
   }
-}
+
+
+  }
+
