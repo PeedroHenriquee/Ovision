@@ -46,11 +46,6 @@ class _Fotostate extends State<Fotos> {
       
 
     }
-
-    
-  
-
-
   }
 
   addImage() {
@@ -94,8 +89,8 @@ class _Fotostate extends State<Fotos> {
   String imageUrl = ' ';
   uploadImage() {
     setState(() async {
-      // Create a storage reference from our app
-      ;
+    
+      
       
       
 
@@ -196,13 +191,7 @@ class _Fotostate extends State<Fotos> {
                 ),
               ],
             ),
-            if(imageSelect != null)
-              ElevatedButton(
-                onPressed: addImage,
-                child: const Text("Salvar"),
-                  
-              
-              ),
+            
             if (imageSelect != null)
               ElevatedButton(
                 onPressed: uploadImage,
