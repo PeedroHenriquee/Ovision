@@ -6,8 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ovision/main.dart';
 import 'package:ovision/views/myapp.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:permission_handler/permission_handler.dart';
-
 
 class Fotos extends StatefulWidget {
   @override
@@ -41,38 +39,11 @@ class _Fotostate extends State<Fotos> {
     if (image != null) {
       setState(() {
         imageSelect = File(image.path);
-      });
-
-      
-
+      }
+      );
     }
   }
 
-  addImage() {
-        setState(() async {
-      
-      
-      String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-
-      final referenceRoot = FirebaseStorage.instance.ref();
-
-      final referenceDirImages = referenceRoot.child('images');
-
-      final referenceImageToUpload = referenceDirImages.child(uniqueFileName);
-
-      try{
-         await referenceImageToUpload.putFile(File(imageSelect.path));
-
-          await referenceImageToUpload.getDownloadURL();
-
-      }catch(error){
-
-        //erro ocorrido
-      }
-
-   
-    });
-  }
   
 
   
@@ -80,12 +51,9 @@ class _Fotostate extends State<Fotos> {
   clearImage() {
     setState(() {
       imageSelect = null;
-
     });
-
-
-  
   }
+
   String imageUrl = ' ';
   uploadImage() {
     setState(() async {
@@ -129,6 +97,7 @@ class _Fotostate extends State<Fotos> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,11 +109,11 @@ class _Fotostate extends State<Fotos> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             AspectRatio(
-              aspectRatio: 4 / 5,
-              child: imageSelect == null
-                  ? Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(32.0),
+              aspectRatio: 4/5,
+              child: imageSelect == null?
+              Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.all(32.0),
                       color: Colors.grey,
                       width: double.maxFinite,
                       height: 500,
@@ -159,30 +128,34 @@ class _Fotostate extends State<Fotos> {
                     ),
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ElevatedButton(
+               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 8),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15))
+                    ),
+                      
                   onPressed: pickImageCamera,
                   child: const Icon(
                     Icons.camera_alt,
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
+
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 40, vertical: 8),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15))
+                    ),
+
                   onPressed: pickImageGaleria,
                   child: const Icon(
                     Icons.photo_library,
@@ -191,26 +164,47 @@ class _Fotostate extends State<Fotos> {
                 ),
               ],
             ),
-            
-            if (imageSelect != null)
+            SizedBox(height: 15,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if(imageSelect != null)
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 35, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15))
+                ),
                 onPressed: uploadImage,
-                child: const Text("Salvar"),
+                child: const Text(
+                  "Salvar",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
+
             if (imageSelect != null)
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15))
+                ),
                 onPressed: clearImage,
-                child: const Text("Eliminar"),
-              
+                child: const Text(
+                  "Eliminar",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                  ),
+                  ),
               ),
-            
-
+              ],
+            )
           ],
         ),
       ),
     );
   }
-
-
-  }
-
+}
