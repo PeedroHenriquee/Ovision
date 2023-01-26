@@ -131,7 +131,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                       ),
               ),
               SizedBox(
-                height: 30,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -165,7 +165,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
