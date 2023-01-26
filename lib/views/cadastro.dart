@@ -38,44 +38,105 @@ class _CadastroState extends State<Cadastro> {
             ),
             //Separarção entre a foto e o espaço de loguin.
             SizedBox(
-              height: 40,
+              height: 55,
             ),
             //classe para incluir o email
             TextFormField(
                 controller: _nomeController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    ),
                     label: Text('Digite seu nome'),
-                    icon: Icon(Icons.account_box_outlined))),
+                    prefixIcon:
+                    Icon(Icons.account_box_outlined))),
             SizedBox(
-              height: 5,),
+              height: 10),
             TextFormField(
                 controller: _emailController,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    ),
                     label: Text('Digite seu e-mail'),
-                    icon: Icon(Icons.email))),
+                    prefixIcon: Icon(Icons.email))),
               SizedBox(
-              height: 5,),
+              height: 10),
             TextFormField(
                 controller: _psController,
                 obscureText: true,
                 decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    ),
                     label: Text('Digite sua senha'), 
-                    icon: Icon(Icons.key_off))),
+                    prefixIcon: Icon(Icons.key_off))),
             SizedBox(
-              height: 40,
+              height: 60,
             ),
-            //botao para cadastrar usúario.
-            ElevatedButton(
-              onPressed: () {
-                cadastrar();
-              },
-              child: Text('CADASTRAR'),
-              style: ButtonStyle(
-                minimumSize: MaterialStateProperty.all(Size(120, 40)),
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
+
+             Container(
+                height:60,
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end:Alignment.bottomRight,
+                    stops:[0.3,1],
+                    colors:[
+                      Color(0xFF06881D),
+                      Color.fromARGB(255, 12, 172, 57),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  )
+                ),
+                child:SizedBox.expand(
+                  child: TextButton(
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(                          
+                          "   Cadastrar",
+                          style:TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color:Colors.white,
+                            fontSize:18,
+                          ),
+                          textAlign: TextAlign.left,
+                          ),
+                      ],
+                    ),
+                    onPressed: () => {
+                      cadastrar()
+                    },
+                  ),
                 ),
               ),
+
+              SizedBox(height: 15),
+
+              Container(
+                height:40,
+                alignment: Alignment.center,
+                child: TextButton(
+                  child: Text(
+                    "Já tem uma conta? Faça Login!",
+                    style: TextStyle(
+                      fontSize: 15
+                    ),
+                  ),
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Home(title:
+                          'Home')));
+                  }
+                ),
+              ),
+            //botao para cadastrar usúario.
             ]
           ),
         ),
