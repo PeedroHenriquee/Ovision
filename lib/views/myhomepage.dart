@@ -85,7 +85,8 @@ class _HomeState extends State<Home> {
                     suffixIcon: MouseRegion(
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
-                      child: Icon( _showPassword == false ? Icons.visibility_off : Icons.visibility, color: Colors.grey,),
+                      child: Icon( _showPassword == false ? Icons.visibility_off : Icons.visibility, color: 
+                      Colors.grey,),
                       onTap: () {
                         setState(() {
                           _showPassword = !_showPassword;
@@ -93,42 +94,86 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ),
-              ),
-              
-                ),
-              
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                   ElevatedButton(
-                child: Text('ENTRAR'),
-                onPressed: () {
-                  login();
-                  
-                },
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size(130, 40)),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
+              ),),
+
+              SizedBox(height: 5),
+
+              Container(
+                height:40,
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  child: Text(
+                    "Recuperar Senha",
+                  ),
+                  onPressed: (){}
                 ),
               ),
-                  ElevatedButton(
-                child: Text('CADASTRAR'),
-                onPressed: () {
-                  Navigator.push(
+
+              const SizedBox(height: 15),
+
+              // TESTE
+              Container(
+                height:60,
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end:Alignment.bottomRight,
+                    stops:[0.3,1],
+                    colors:[
+                      Color(0xFF06881D),
+                      Color.fromARGB(255, 12, 172, 57),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  )
+                ),
+                child:SizedBox.expand(
+                  child: TextButton(
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(                          
+                          "   Login",
+                          style:TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color:Colors.white,
+                            fontSize:18,
+                          ),
+                          textAlign: TextAlign.left,
+                          ),
+                      ],
+                    ),
+                    onPressed: () => {
+                      login()
+                    },
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              Container(
+                height: 40,
+                child: TextButton(
+                  child: Text(
+                    "Cadastre-se",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18
+                    ),
+                  ),
+                  onPressed: (){
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Cadastro(title: 'Cadastro')));
-                },
-                style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all(Size(130, 40)),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)))
-                ),
-              ),
-                ],
+                          builder: (context) => Cadastro(title:
+                          'Cadastro')));
+                  },
+                )
               )
+              // TESTE
             ],
           ),
         ),
