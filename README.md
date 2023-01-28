@@ -13,9 +13,9 @@
 ## 🖼 Screenshot das telas do projeto
 <div>
   <h4>Respectivamente telas de login, cadastro e captura de imagem.</h4>
-  <img height="400" src="/images/github/tela_login"/>
-  <img height="400" src="/images/github/tela_cadastro"/>
-  <img height="400" src="/images/github/tela_captura">
+  <img height="400" src="/images/github/tela_login.jpeg"/>
+  <img height="400" src="/images/github/tela_cadastro.jpeg"/>
+  <img height="400" src="/images/github/tela_captura.jpeg">
 </div>
 
 ## 🛠️ Funcionalidades
