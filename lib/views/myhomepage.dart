@@ -5,7 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:ovision/views/cadastro.dart';
 
-import 'package:ovision/views/fotoo.dart';
+import 'package:ovision/views/foto.dart';
 
 class Home extends StatefulWidget {
   const Home({key, title}) : super(key: key);

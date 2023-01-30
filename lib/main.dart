@@ -7,7 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:ovision/views/cadastro.dart';
-import 'package:ovision/views/fotoo.dart';
+import 'package:ovision/views/foto.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
