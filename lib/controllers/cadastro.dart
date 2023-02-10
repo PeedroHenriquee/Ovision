@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ovision/views/myhomepage.dart';
+import 'package:ovision/controllers/login.dart';
 
 class Cadastro extends StatefulWidget {
   Cadastro({Key key, String title}) : super(key: key);
@@ -131,7 +131,7 @@ class _CadastroState extends State<Cadastro> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Home(title:
+                          builder: (context) => Login(title:
                           'Home')));
                   }
                 ),
@@ -153,7 +153,7 @@ class _CadastroState extends State<Cadastro> {
         userCredential.user.updateDisplayName(_nomeController.text);
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => Home(title: 'principal')),
+            MaterialPageRoute(builder: (context) => Login(title: 'principal')),
             (route) => false);
       }
     } on FirebaseAuthException catch (e) {

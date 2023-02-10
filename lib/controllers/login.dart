@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:ovision/views/cadastro.dart';
+import 'package:ovision/controllers/cadastro.dart';
 
 import 'package:ovision/views/foto.dart';
+import 'package:ovision/views/home/home.dart';
 
-class Home extends StatefulWidget {
-  const Home({key, title}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({key, title}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Login> createState() => _LoginState();
 }
 
-class _HomeState extends State<Home> {
+class _LoginState extends State<Login> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
@@ -192,7 +193,7 @@ class _HomeState extends State<Home> {
         Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Fotos()));
+                          builder: (context) => Home()));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

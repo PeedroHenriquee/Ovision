@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:ovision/main.dart';
-import 'package:ovision/views/myapp.dart';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:ovision/main.dart';
+import 'package:ovision/myapp.dart';
 
 class Fotos extends StatefulWidget {
   @override
@@ -13,29 +15,74 @@ class Fotos extends StatefulWidget {
 }
 
 class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
+  String imageUrl = ' ';
+
   File imageSelect;
 
   final ImagePicker _imagePicker = ImagePicker();
 
+  CollectionReference _reference =
+      FirebaseFirestore.instance.collection('gallery');
+
   pickImageCamera() async {
     final XFile image =
         await _imagePicker.pickImage(source: ImageSource.camera);
+
+    print('IMAGEM CAMERA: ${image?.path}');
 
     if (image != null) {
       setState(() {
         imageSelect = File(image.path);
       });
     }
+
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    //Upload to Firebase Storage
+
+    //Get a reference to storage root
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+    //Create a referernce for the image to be stored
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    //Handle errors/success
+    try {
+      //Store the file
+      await referenceImageToUpload.putFile(File(image.path));
+      //Succes: get the download URL
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+    } catch (error) {
+      //Some error occurred
+    }
   }
 
   pickImageGaleria() async {
     final XFile image =
         await _imagePicker.pickImage(source: ImageSource.gallery);
+    print('IMAGE: ${image?.path}');
 
     if (image != null) {
       setState(() {
         imageSelect = File(image.path);
       });
+    }
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    //Upload to Firebase Storage
+
+    //Get a reference to storage root
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+    //Create a referernce for the image to be stored
+    Reference referenceImageToUpload = referenceDirImages.child(uniqueFileName);
+    //Handle errors/success
+    try {
+      //Store the file
+      await referenceImageToUpload.putFile(File(image.path));
+      //Succes: get the download URL
+      imageUrl = await referenceImageToUpload.getDownloadURL();
+    } catch (error) {
+      //Some error occurred
     }
   }
 
@@ -45,7 +92,6 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
     });
   }
 
-  String imageUrl = ' ';
   uploadImage() {
     setState(() async {
 // Create the file metadata
@@ -80,6 +126,23 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
             break;
         }
       });
+
+      if (imageUrl.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Please upload an image'),
+          backgroundColor: Colors.redAccent,
+        ));
+      }
+
+      //Create a Map of data
+      Map<String, String> dataToSend = {
+        'image': imageUrl,
+      };
+
+      //Add a new item
+      _reference.add(dataToSend);
+
+      print('URL DA IMAGEM: ${imageUrl}');
     });
   }
 /*
@@ -112,7 +175,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
             children: [
               AspectRatio(
                 //9/16
-                aspectRatio: 9/16,
+                aspectRatio: 9 / 16,
                 child: imageSelect == null
                     ? Container(
                         alignment: Alignment.center,
@@ -152,8 +215,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical:
-                            10),
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                     onPressed: pickImageGaleria,
@@ -174,9 +236,8 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   if (imageSelect != null)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 35,
-                              vertical: 12),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 35, vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
                       onPressed: uploadImage,
@@ -190,9 +251,8 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   if (imageSelect != null)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 30,
-                              vertical: 12),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
                       onPressed: clearImage,
@@ -207,7 +267,6 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
               )
             ],
           ),
-          
         ),
       ),
       /*
