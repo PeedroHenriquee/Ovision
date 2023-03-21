@@ -121,8 +121,12 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
             // Handle unsuccessful uploads
             break;
           case TaskState.success:
-            // Handle successful uploads on complete
-            // ...
+          ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Upload was successful!"),
+          backgroundColor: Colors.lightGreen,
+        ),
+        );
             break;
         }
       });
@@ -145,23 +149,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
       print('URL DA IMAGEM: ${imageUrl}');
     });
   }
-/*
-  String title = 'BottomNavigationBar';
 
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 5, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tabController.dispose();
-  }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -269,35 +257,6 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      /*
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-          child: Container(
-            color: Color.fromARGB(194, 76, 175, 79),
-            child: TabBar(
-              labelColor: Colors.white,
-              labelStyle: TextStyle(fontSize: 15),
-              indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(color: Color.fromARGB(156, 76, 175, 79), width:
-                  0.0),
-                  insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 40.0)),
-              // for indicator show and customization
-              indicatorColor: Colors.white,
-              tabs: [
-                Tab(
-                  text: 'Camera',
-                  icon: Icon(Icons.camera_alt),
-                ),
-                Tab(text: 'Gallery', icon: Icon(Icons.photo_library)),
-                Tab(text: 'Exit', icon: Icon(Icons.exit_to_app)),
-              ],
-              controller: _tabController,
-            ),
-          ),
-        ),
-      )*/
     );
   }
 }

@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "392813468042",
-    "project_id": "ovisonbd",
-    "storage_bucket": "ovisonbd.appspot.com"
+    "project_number": "954370146176",
+    "project_id": "ovision-6955e",
+    "storage_bucket": "ovision-6955e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:392813468042:android:01ca6d1035b60456565073",
+        "mobilesdk_app_id": "1:954370146176:android:6f243e84af75d120300b65",
         "android_client_info": {
           "package_name": "com.example.ovision"
         }
       },
       "oauth_client": [
         {
-          "client_id": "392813468042-rr1bteu7vr4l7067i8iip6uq4icm7gj0.apps.googleusercontent.com",
+          "client_id": "954370146176-sbvk7on24bo064snv6ingl7kp62aqgkl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAhVGUJnuAFvwF_8APa70ltki6FjrhuSg0"
+          "current_key": "AIzaSyBPpW4hzd4ld_rKWc8Xu55JSt_sCWEjat4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "392813468042-rr1bteu7vr4l7067i8iip6uq4icm7gj0.apps.googleusercontent.com",
+              "client_id": "954370146176-sbvk7on24bo064snv6ingl7kp62aqgkl.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "954370146176-6u73s5cnk723t6b5tl1brg5ei38hkolq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ovision"
+              }
             }
           ]
         }

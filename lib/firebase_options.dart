@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,41 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBrBR268ieZjWmpI4hXtIittownA7Nffqc',
-    appId: '1:392813468042:web:8646d692b2a313e9565073',
-    messagingSenderId: '392813468042',
-    projectId: 'ovisonbd',
-    authDomain: 'ovisonbd.firebaseapp.com',
-    storageBucket: 'ovisonbd.appspot.com',
-    measurementId: 'G-5HJJJTR3Q3',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAhVGUJnuAFvwF_8APa70ltki6FjrhuSg0',
-    appId: '1:392813468042:android:01ca6d1035b60456565073',
-    messagingSenderId: '392813468042',
-    projectId: 'ovisonbd',
-    storageBucket: 'ovisonbd.appspot.com',
+    apiKey: 'AIzaSyBPpW4hzd4ld_rKWc8Xu55JSt_sCWEjat4',
+    appId: '1:954370146176:android:6f243e84af75d120300b65',
+    messagingSenderId: '954370146176',
+    projectId: 'ovision-6955e',
+    storageBucket: 'ovision-6955e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC8UZ8jEABrzKWn-AniKBm-iTgf_prdcpE',
-    appId: '1:392813468042:ios:47003d428c262443565073',
-    messagingSenderId: '392813468042',
-    projectId: 'ovisonbd',
-    storageBucket: 'ovisonbd.appspot.com',
-    iosClientId: '392813468042-vi8jpiho44012bevhu8e8hq2i5epqesv.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ovision',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC8UZ8jEABrzKWn-AniKBm-iTgf_prdcpE',
-    appId: '1:392813468042:ios:47003d428c262443565073',
-    messagingSenderId: '392813468042',
-    projectId: 'ovisonbd',
-    storageBucket: 'ovisonbd.appspot.com',
-    iosClientId: '392813468042-vi8jpiho44012bevhu8e8hq2i5epqesv.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDFN5hhACHerVqbS0o_92C-UrqGDjQzQ-w',
+    appId: '1:954370146176:ios:3d7b5f58f5631189300b65',
+    messagingSenderId: '954370146176',
+    projectId: 'ovision-6955e',
+    storageBucket: 'ovision-6955e.appspot.com',
+    iosClientId: '954370146176-6u73s5cnk723t6b5tl1brg5ei38hkolq.apps.googleusercontent.com',
     iosBundleId: 'com.example.ovision',
   );
 }
