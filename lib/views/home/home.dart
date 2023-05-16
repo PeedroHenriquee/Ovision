@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
+
 
   @override
   State<Home> createState() => _HomeState();
@@ -15,21 +15,21 @@ class _HomeState extends State<Home> {
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(32.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
               SizedBox(
                 height: 150,
                 child: Image.asset('images/as.png'),
               ),
-              SizedBox(height: 70.0),
+              const SizedBox(height: 70.0),
               Column(
                 children: [
                   ElevatedButton(
                       style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(Size(160,
+                        minimumSize: MaterialStateProperty.all(const Size(160,
                         130)),
-                        textStyle: MaterialStateProperty.all(TextStyle(
+                        textStyle: MaterialStateProperty.all(const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         )),
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
                       ),
                       onPressed: () =>
                           Navigator.pushNamed(context, '/fotos'),
-                      child: Column(
+                      child: const Column(
                         children: [
                           Text('Camera'),
                           SizedBox(height: 10),
@@ -47,13 +47,13 @@ class _HomeState extends State<Home> {
                         ],
                       )),
 
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
 
                   ElevatedButton(
                       style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(Size(160,
+                        minimumSize: MaterialStateProperty.all(const Size(160,
                         130)),
-                        textStyle: MaterialStateProperty.all(TextStyle(
+                        textStyle: MaterialStateProperty.all(const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                         )),
@@ -63,7 +63,7 @@ class _HomeState extends State<Home> {
                       ),
                       onPressed: () =>
                           Navigator.pushNamed(context, '/gallery'),
-                      child: Column(
+                      child: const Column(
                         children: [
                           Text('Galeria'),
                           SizedBox(height: 10),
