@@ -194,6 +194,7 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (imageSelect == null)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
@@ -206,6 +207,7 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
+                  if (imageSelect == null)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding:
