@@ -1,31 +1,30 @@
 import 'dart:io';
-import 'dart:async';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:ovision/main.dart';
-import 'package:ovision/myapp.dart';
-
 class Fotos extends StatefulWidget {
+  const Fotos({Key? key}) : super(key: key);
+
+
   @override
-  State<Fotos> createState() => _Fotostate();
+  State<Fotos> createState() => _FotosState();
 }
 
-class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
+class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
   String imageUrl = ' ';
 
-  File imageSelect;
+  File? imageSelect;
 
   final ImagePicker _imagePicker = ImagePicker();
 
-  CollectionReference _reference =
-      FirebaseFirestore.instance.collection('gallery');
+  final CollectionReference _reference =
+      FirebaseFirestore.instance.collection('gallery'); // firestore db
 
   pickImageCamera() async {
-    final XFile image =
+    final XFile? image =
         await _imagePicker.pickImage(source: ImageSource.camera);
 
     print('IMAGEM CAMERA: ${image?.path}');
@@ -48,7 +47,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
     //Handle errors/success
     try {
       //Store the file
-      await referenceImageToUpload.putFile(File(image.path));
+      await referenceImageToUpload.putFile(File(image!.path));
       //Succes: get the download URL
       imageUrl = await referenceImageToUpload.getDownloadURL();
     } catch (error) {
@@ -57,7 +56,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
   }
 
   pickImageGaleria() async {
-    final XFile image =
+    final XFile? image =
         await _imagePicker.pickImage(source: ImageSource.gallery);
     print('IMAGE: ${image?.path}');
 
@@ -78,7 +77,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
     //Handle errors/success
     try {
       //Store the file
-      await referenceImageToUpload.putFile(File(image.path));
+      await referenceImageToUpload.putFile(File(image!.path));
       //Succes: get the download URL
       imageUrl = await referenceImageToUpload.getDownloadURL();
     } catch (error) {
@@ -86,22 +85,16 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
     }
   }
 
-  clearImage() {
-    setState(() {
-      imageSelect = null;
-    });
-  }
 
   uploadImage() {
     setState(() async {
 // Create the file metadata
-      final metadata = SettableMetadata(contentType: "imageee/jpeg");
 
 // Create a reference to the Firebase Storage bucket
       final storageRef = FirebaseStorage.instance.ref();
 
 // Upload file and metadata to the path 'images/mountains.jpg'
-      final uploadTask = storageRef.child("imagens").putFile(imageSelect);
+      final uploadTask = storageRef.child("images").putFile(imageSelect!);
 
 // Listen for state changes, errors, and completion of the upload.
       uploadTask.snapshotEvents.listen((TaskSnapshot taskSnapshot) {
@@ -118,17 +111,27 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
             print("Upload was canceled");
             break;
           case TaskState.error:
-            // Handle unsuccessful uploads
+            print("An error ocurred!");
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('An error ocurred!'),
+                backgroundColor: Colors.redAccent,)
+            );
             break;
           case TaskState.success:
-            // Handle successful uploads on complete
-            // ...
+            print("Upload was successful!");
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Upload was successful'),
+                backgroundColor: Colors.lightGreen,
+              ),
+            );
             break;
         }
       });
 
       if (imageUrl.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Please upload an image'),
           backgroundColor: Colors.redAccent,
         ));
@@ -140,28 +143,19 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
       };
 
       //Add a new item
-      _reference.add(dataToSend);
+      _reference.add(dataToSend); // to firestore
 
       print('URL DA IMAGEM: ${imageUrl}');
+
+      
     });
   }
-/*
-  String title = 'BottomNavigationBar';
 
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+  clearImage() {
+    setState(() {
+      imageSelect = null;
+    });
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _tabController.dispose();
-  }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -189,17 +183,18 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                         ),
                       )
                     : Image.file(
-                        File(imageSelect.path),
-                        fit: BoxFit.cover,
+                        File(imageSelect!.path),
+                        fit: BoxFit.contain,
                       ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (imageSelect == null)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
@@ -212,10 +207,11 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
+                  if (imageSelect == null)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                            const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                     onPressed: pickImageGaleria,
@@ -226,7 +222,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -236,31 +232,33 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   if (imageSelect != null)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 35, vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
                       onPressed: uploadImage,
                       child: const Text(
                         "Salvar",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                        ),
+                        // style: TextStyle(
+                        //   fontWeight: FontWeight.w700,
+                        // ),
                       ),
                     ),
                   if (imageSelect != null)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
-                      onPressed: clearImage,
+                      onPressed: (){
+                        clearImage();
+                      }, //clearImage,
                       child: const Text(
                         "Eliminar",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                        ),
+                        // style: TextStyle(
+                        //   fontWeight: FontWeight.w700,
+                        // ),
                       ),
                     ),
                 ],
@@ -269,35 +267,6 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      /*
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-          child: Container(
-            color: Color.fromARGB(194, 76, 175, 79),
-            child: TabBar(
-              labelColor: Colors.white,
-              labelStyle: TextStyle(fontSize: 15),
-              indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(color: Color.fromARGB(156, 76, 175, 79), width:
-                  0.0),
-                  insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 40.0)),
-              // for indicator show and customization
-              indicatorColor: Colors.white,
-              tabs: [
-                Tab(
-                  text: 'Camera',
-                  icon: Icon(Icons.camera_alt),
-                ),
-                Tab(text: 'Gallery', icon: Icon(Icons.photo_library)),
-                Tab(text: 'Exit', icon: Icon(Icons.exit_to_app)),
-              ],
-              controller: _tabController,
-            ),
-          ),
-        ),
-      )*/
     );
   }
 }

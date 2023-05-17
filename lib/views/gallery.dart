@@ -2,20 +2,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
+// ignore: must_be_immutable
 class Galeria extends StatelessWidget {
-  Galeria({Key key}) : super(key: key) {
+  Galeria({Key? key}) : super(key: key) {
     _stream = _reference.snapshots();
   }
 
-  CollectionReference _reference = FirebaseFirestore.instance.collection('gallery');
+  final CollectionReference _reference = FirebaseFirestore.instance.collection('gallery');
 
-  Stream<QuerySnapshot> _stream;
+  late Stream<QuerySnapshot> _stream;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Galeria'),
+        title: const Text('Galeria'),
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -38,7 +39,7 @@ class Galeria extends StatelessWidget {
             //Display the list
             return GridView.builder(
                 gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(
+                  const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     crossAxisSpacing: 0,
                     mainAxisSpacing: 10,
@@ -57,7 +58,7 @@ class Galeria extends StatelessWidget {
           }
 
           //Show loader
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         },
       ), //Display a list // Add a FutureBuilder
     );

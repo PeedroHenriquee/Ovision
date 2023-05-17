@@ -8,7 +8,7 @@
 </div>
 
 ## 🎯 Sobre o projeto
-- Em breve!
+- Sistema para gestão de fazendas e criação de gado de corte, baseado em visão computacional.
 
 ## 🖼 Screenshot das telas do projeto
 <div>
